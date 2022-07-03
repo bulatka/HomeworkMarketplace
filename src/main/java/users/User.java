@@ -15,9 +15,6 @@ public class User implements Payable, UserIF, GuestIF {
     protected List<Order> ordersList = new ArrayList<>();
     protected HashMap<Goods, Integer> basket = new HashMap<>();
 
-    public String getPassword() {
-        return password;
-    }
 
     public List<Order> getOrdersList() {
         return ordersList;
@@ -37,6 +34,10 @@ public class User implements Payable, UserIF, GuestIF {
         return login;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public int getAge() {
         return age;
     }
@@ -54,12 +55,6 @@ public class User implements Payable, UserIF, GuestIF {
     @Override
     public void cancelOrder(int orderID) {
         System.out.println("Заказ " + orderID + " отменен!");
-    }
-
-    @Override
-    public void addToBasket(Goods item, int quantity) {
-        basket.put(item, quantity);
-        System.out.println("Товар " + item + " " + quantity + " добавлен в корзину");
     }
 
     @Override

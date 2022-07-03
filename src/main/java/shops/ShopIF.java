@@ -6,6 +6,8 @@ import users.User;
 import java.util.List;
 
 public interface ShopIF {
+
+    void addToBasket(int item, int quantity);
     void addUser(User user);
     void addItem(Goods item);
 
@@ -21,4 +23,6 @@ public interface ShopIF {
     void recommendGoods();
 
     void printWelcome();
+
+    void printMenu();
 }

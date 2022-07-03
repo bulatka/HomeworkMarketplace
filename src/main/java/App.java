@@ -28,11 +28,20 @@ public class App {
         shop.printAvailableGoods();
 
         Scanner sc = new Scanner(System.in);
-        System.out.println("Введите номер позиции и количество для добавления в корзину или 0 для вызова меню.");
-        String stbasket = sc.nextLine();
-        if (stbasket.equals("0")) {
-            System.out.println("1. Сортировка товаров по имени");
-            shop.sortGoodsByName();
+        while (true) {
+            System.out.println("Введите номер позиции и количество для добавления в корзину или 0 для вызова меню.");
+            System.out.println("Введите \"заказ\" для перехода к оформлению заказа");
+            String stbasket = sc.nextLine();
+            if (stbasket.equals("заказ")) {
+                // ORDERING to do
+            }
+            if (stbasket.equals("0")) {
+                shop.printMenu();
+            } else {
+                String[] basket = stbasket.split(" ");
+                shop.addToBasket(Integer.parseInt(basket[1]), Integer.parseInt(basket[2]));
+            }
+            //TO DO ORDER, PAY, FruitShop
         }
     }
 }

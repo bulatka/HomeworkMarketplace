@@ -11,6 +11,8 @@ public class DevicesShop implements ShopIF {
     final private int RECOMMENDATION_RATING = 7;
     private HashMap<String, User> usersList = new HashMap<>();
 
+    private HashMap<Goods, Integer> basket = new HashMap<>();
+
     @Override
     public void addUser(User user) {
         usersList.put(user.getLogin(), user);
@@ -44,6 +46,12 @@ public class DevicesShop implements ShopIF {
         Collections.sort(store);
         printAvailableGoods();
     }
+    @Override
+    public void addToBasket(int itemInt, int quantity) {
+        Goods item = store.get(itemInt);
+        basket.put(item, quantity);
+        System.out.println("Товар " + item + " " + quantity + " добавлен в корзину");
+    }
 
     @Override
     public void searchByName(String name) {
@@ -62,6 +70,29 @@ public class DevicesShop implements ShopIF {
     }
 
     @Override
+    public void printMenu() {
+        System.out.println("1. Сортировка товаров по имени.\n"
+                + "2. Поиск товара по имени.\n"
+                + "3. Рекомендовано к покупке.\n");
+        Scanner sc = new Scanner(System.in);
+        int ch = Integer.parseInt(sc.nextLine());
+        switch (ch) {
+            case 1:
+                this.sortGoodsByName();
+                break;
+            case 2:
+                System.out.println("Введите имя товара для поиска: ");
+                String name = sc.nextLine();
+                this.searchByName(name);
+                break;
+            case 3:
+                this.recommendGoods();
+                break;
+        }
+
+    }
+
+    @Override
     public void printWelcome() {
         System.out.println("Добро пожаловать в магазин \"Электроника\"\n"
                 + "Выберите параметры авторизации:\n"
@@ -71,7 +102,7 @@ public class DevicesShop implements ShopIF {
                 + "0. Выход.");
 
         Scanner sc = new Scanner(System.in);
-        int choice =  Integer.parseInt(sc.nextLine());
+        int choice = Integer.parseInt(sc.nextLine());
         switch (choice) {
             default:
                 System.out.println("Введен неверный пункт меню.\n");
@@ -125,5 +156,7 @@ public class DevicesShop implements ShopIF {
             case 0:
                 break;
         }
+
+
     }
 }

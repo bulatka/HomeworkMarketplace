@@ -31,12 +31,6 @@ public class Guest implements GuestIF, Payable {
     }
 
     @Override
-    public void addToBasket(Goods item, int quantity) {
-        basket.put(item, quantity);
-        System.out.println("Товар " + item + " " + quantity + " добавлен в корзину");
-    }
-
-    @Override
     public void order(HashMap<Goods, Integer> basket) {
         Order newOrder = new Order(basket);
         System.out.println("Создан заказ №" + newOrder.getID() + ".");
