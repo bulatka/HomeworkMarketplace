@@ -18,4 +18,6 @@ public interface ShopIF {
     void searchByName(List<Goods> store, String name);
 
     void recommendGoods(List<Goods> store);
+
+    void printWelcome();
 }

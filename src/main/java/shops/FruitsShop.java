@@ -52,4 +52,9 @@ public class FruitsShop implements ShopIF {
                 System.out.println("Рекомендуем к покупке: " + item);
         }
     }
+
+    @Override
+    public void printWelcome() {
+
+    }
 }
