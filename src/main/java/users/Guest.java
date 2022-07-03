@@ -10,6 +10,26 @@ public class Guest implements GuestIF, Payable {
     protected String phoneNumber;
     protected HashMap<Goods, Integer> basket = new HashMap<>();
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public HashMap<Goods, Integer> getBasket() {
+        return basket;
+    }
+
+    public void setBasket(HashMap<Goods, Integer> basket) {
+        this.basket = basket;
+    }
+
+    public Guest(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     @Override
     public void addToBasket(Goods item, int quantity) {
         basket.put(item, quantity);

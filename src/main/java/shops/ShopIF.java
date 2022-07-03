@@ -1,23 +1,24 @@
 package shops;
 
 import goods.Goods;
+import users.User;
 
 import java.util.List;
 
 public interface ShopIF {
-
+    void addUser(User user);
     void addItem(Goods item);
 
-    void printAvailableGoods(List<Goods> store);
+    void printAvailableGoods();
 
     void removeItem(Goods item);
 
-    void sortGoodsByName(List<Goods> store);
+    void sortGoodsByName();
 
 
-    void searchByName(List<Goods> store, String name);
+    void searchByName(String name);
 
-    void recommendGoods(List<Goods> store);
+    void recommendGoods();
 
     void printWelcome();
 }

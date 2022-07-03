@@ -15,6 +15,17 @@ public class User implements Payable, UserIF, GuestIF {
     protected List<Order> ordersList = new ArrayList<>();
     protected HashMap<Goods, Integer> basket = new HashMap<>();
 
+    public String getPassword() {
+        return password;
+    }
+
+    public List<Order> getOrdersList() {
+        return ordersList;
+    }
+
+    public HashMap<Goods, Integer> getBasket() {
+        return basket;
+    }
 
     public User(String login, String password, int age) {
         this.login = login;

@@ -9,7 +9,7 @@ public class Goods implements Comparable<Goods> {
     protected int rating;
 
     public Goods(String name, int price, int rating) {
-        this.id = Objects.hash(name);
+        this.id = Math.abs(Objects.hash(name));
         this.name = name;
         this.price = price;
         this.rating = rating;
@@ -56,6 +56,6 @@ public class Goods implements Comparable<Goods> {
 
     @Override
     public int compareTo(Goods item) {
-        return this.id - item.id;
+        return this.name.compareTo(item.name);
     }
 }
