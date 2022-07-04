@@ -4,14 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c80594a7-0e0f-4608-ad7a-8f95b14815a8" name="Changes" comment="Homework done 91%">
+    <list default="true" id="c80594a7-0e0f-4608-ad7a-8f95b14815a8" name="Changes" comment="Homework done 99%">
+      <change afterPath="$PROJECT_DIR$/Readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/AppFruits.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/users/VipUser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/goods/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/goods/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AppDevices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/goods/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/shops/Order.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/shops/DevicesShop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/shops/DevicesShop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/shops/FruitsShop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/shops/FruitsShop.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/shops/ShopIF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/shops/ShopIF.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/users/Guest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/users/Guest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/users/Guest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/users/GuestIF.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/users/Payable.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/users/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/users/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/users/UserIF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/users/UserIF.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,17 +49,36 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
   </component>
-  <component name="RunManager">
-    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="App" />
+  <component name="RunManager" selected="Application.AppFruits">
+    <configuration name="AppDevices" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="AppDevices" />
       <module name="marketplace" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AppFruits" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="AppFruits" />
+      <module name="marketplace" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.App" />
+        <item itemvalue="Application.AppFruits" />
+        <item itemvalue="Application.AppDevices" />
       </list>
     </recent_temporary>
   </component>
@@ -120,7 +146,8 @@
     <MESSAGE value="Homework done 85%" />
     <MESSAGE value="Homework done 89%" />
     <MESSAGE value="Homework done 91%" />
-    <option name="LAST_COMMIT_MESSAGE" value="Homework done 91%" />
+    <MESSAGE value="Homework done 99%" />
+    <option name="LAST_COMMIT_MESSAGE" value="Homework done 99%" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -129,6 +156,20 @@
           <url>file://$PROJECT_DIR$/src/main/java/goods/Goods.java</url>
           <line>30</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/shops/DevicesShop.java</url>
+          <line>188</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/AppFruits.java</url>
+          <line>7</line>
+          <properties class="AppFruits" method="main">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

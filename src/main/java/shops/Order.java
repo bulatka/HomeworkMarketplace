@@ -1,12 +1,14 @@
-package goods;
+package shops;
+
+import goods.Goods;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Objects;
 
 public class Order {
-    private HashMap<Goods, Integer> basket = new HashMap<>();
-    private int ID;
+    final private HashMap<Goods, Integer> basket;
+    final private int ID;
 
     public Order(HashMap<Goods, Integer> basket) {
         this.ID = Math.abs(Objects.hash(LocalDateTime.now()));

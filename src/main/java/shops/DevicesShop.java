@@ -1,22 +1,22 @@
 package shops;
 
 import goods.Goods;
-import goods.Order;
 import users.User;
+import users.UserIF;
 
 import java.util.*;
 
-public class DevicesShop implements ShopIF {
+public class DevicesShop implements ShopIF, ShopFeaturesIF {
 
     final private List<Goods> store = new ArrayList<>();
     final private int RECOMMENDATION_RATING = 7;
-    private HashMap<String, User> usersList = new HashMap<>();
-    private HashMap<User, HashMap<Integer, Order>> ordersMap = new HashMap<>();
+    final private HashMap<String, UserIF> usersList = new HashMap<>();
+    private final HashMap<UserIF, HashMap<Integer, Order>> ordersMap = new HashMap<>();
     private HashMap<Goods, Integer> basket = new HashMap<>();
-    private User authUser = new User(null, null, 0);
+    private UserIF authUser = null;
 
     @Override
-    public void addUser(User user) {
+    public void addUser(UserIF user) {
         usersList.put(user.getLogin(), user);
         System.out.println("Пользователь магазина электроники с логином " + user.getLogin()
                 + " добавлен.");
@@ -35,6 +35,7 @@ public class DevicesShop implements ShopIF {
             System.out.println(i + ". " + item);
             i++;
         }
+        printMarket();
     }
 
     @Override
@@ -86,25 +87,27 @@ public class DevicesShop implements ShopIF {
     @Override
     public void printMarket() {
         Scanner sc = new Scanner(System.in);
+        label:
         while (true) {
             System.out.println("Введите номер позиции и количество (через пробел) для добавления в корзину,\n"
                     + "0 для вызова меню,\n"
                     + "\"end\" для выхода.");
             System.out.println("Введите \"заказ\" для перехода к оформлению заказа");
             String str = sc.nextLine();
-            if (str.equals("заказ")) {
-                order();
-                continue;
-            } else if (str.equals("0")) {
-                printMenu();
-                continue;
-            } else {
-                String[] basket = str.split(" ");
-                addToBasket(Integer.parseInt(basket[0]), Integer.parseInt(basket[1]));
-                continue;
+            switch (str) {
+                case "заказ":
+                    order();
+                    break;
+                case "0":
+                    printMenu();
+                    break;
+                case "end":
+                    break label;
+                default:
+                    String[] basket = str.split(" ");
+                    addToBasket(Integer.parseInt(basket[0]), Integer.parseInt(basket[1]));
+                    break;
             }
-
-
         }
     }
 
@@ -118,65 +121,76 @@ public class DevicesShop implements ShopIF {
 
         Scanner sc = new Scanner(System.in);
         int ch = Integer.parseInt(sc.nextLine());
+        label:
         switch (ch) {
-            case 1:
-                sortGoodsByName();
-                break;
-            case 2:
+            case 1 -> sortGoodsByName();
+            case 2 -> {
                 System.out.println("Введите имя товара для поиска: ");
                 String name = sc.nextLine();
                 searchByName(name);
-                break;
-            case 3:
-                recommendGoods();
-                break;
-            case 4:
-                if (basket.isEmpty()) {
-                    System.out.println("Ваша корзина пуста!");
-                } else {
-                    System.out.println("Ваша корзина:");
-                    System.out.println(basket);
-                }
-                break;
-            case 5:
+            }
+            case 3 -> recommendGoods();
+            case 4 -> printBasket();
+            case 5 -> {
                 System.out.println("Ваши заказы:");
                 System.out.println(ordersMap.get(authUser));
                 System.out.println("1. Повторить заказ.\n" +
                         "2. Отменить заказ.\n" +
-                        "0. Назад меню.");
+                        "0. Предыдущее меню.");
                 ch = sc.nextInt();
-                if (ch == 1) {
-                    reOrder();
-                    printMarket();
-                } else if (ch == 2) {
-                    cancelOrder();
-                    printMarket();
-                } else if (ch == 0) {
-                    break;
-                } else {
-                    System.out.println("Введен неверный пункт меню. Попробуйте снова.");
-                    printMenu();
+                switch (ch) {
+                    case 1:
+                        reOrder();
+                        printMarket();
+                        break;
+                    case 2:
+                        cancelOrder();
+                        printMarket();
+                        break;
+                    case 0:
+                        break label;
+                    default:
+                        System.out.println("Введен неверный пункт меню. Попробуйте снова.");
+                        printMenu();
+                        break;
                 }
+            }
+        }
+    }
+
+    public void printBasket() {
+        if (basket.isEmpty()) {
+            System.out.println("Ваша корзина пуста!");
+        } else {
+            System.out.println("Ваша корзина:");
+            System.out.println(basket);
+            final int[] sum = {0};
+            basket.forEach((g, q) -> sum[0] = sum[0] + g.getPrice() * q);
+            System.out.println("Общая сумма заказа: " + sum[0] + "$");
         }
     }
 
     @Override
     public void order() {
-        System.out.println(basket);
-        System.out.println("Необходимо оплатить заказ!\n"
-                + "Для оплаты введите указанное ниже число либо 0 для отмены");
-        Random random = new Random();
-        int key = random.nextInt(1000, 9999);
-        System.out.println(key);
-        Scanner sc = new Scanner(System.in);
-        int keyInput = sc.nextInt();
-        if (keyInput == key) {
-            authUser.pay();
-            Order order = new Order(new HashMap<Goods, Integer>(basket));
-            orderToMap(order);
+        printBasket();
+        if (basket.isEmpty()) {
+            printMarket();
         } else {
-            System.out.println("Вы ввели неверный код! Попробуте снова");
-            order();
+            System.out.println("Необходимо оплатить заказ!\n"
+                    + "Для оплаты введите указанное ниже число либо 0 для отмены");
+            Random random = new Random();
+            int key = random.nextInt(1000, 9999);
+            System.out.println(key);
+            Scanner sc = new Scanner(System.in);
+            int keyInput = sc.nextInt();
+            if (keyInput == key) {
+                authUser.pay();
+                Order order = new Order(new HashMap<>(basket));
+                orderToMap(order);
+            } else {
+                System.out.println("Вы ввели неверный код! Попробуте снова");
+                order();
+            }
         }
     }
 
@@ -205,8 +219,8 @@ public class DevicesShop implements ShopIF {
         Scanner sc = new Scanner(System.in);
         int inputID = sc.nextInt();
         HashMap<Integer, Order> orderList = ordersMap.get(authUser);
-        Order reOrder = new Order(orderList.get(inputID).getBasket());
-        orderToMap(reOrder);
+        basket = new HashMap<>(orderList.get(inputID).getBasket());
+        order();
     }
 
     @Override
@@ -217,6 +231,8 @@ public class DevicesShop implements ShopIF {
         HashMap<Integer, Order> orderList = ordersMap.get(authUser);
         orderList.remove(inputID);
         ordersMap.put(authUser, orderList);
+        System.out.println("Заказ №" + inputID + "отменен." +
+                "\nДеньги возвращены на баланс пользователя " + authUser.getLogin() + "!");
         System.out.println("Ваши заказы:");
         System.out.println(ordersMap.get(authUser).toString());
     }
@@ -241,10 +257,12 @@ public class DevicesShop implements ShopIF {
                 System.out.println("Введите пароль:");
                 String pass = sc.nextLine();
                 if (usersList.containsKey(login)) {
-                    User exp = usersList.get(login);
+                    UserIF exp = usersList.get(login);
                     if (exp.getPassword().equals(pass)) {
                         System.out.println("Вы вошли успешно вошли под логином " + exp.getLogin());
                         authUser = exp;
+                        printAvailableGoods();
+                        break;
                     } else {
                         System.out.println("Неправильный логин или пароль");
                         printWelcome();
@@ -253,7 +271,6 @@ public class DevicesShop implements ShopIF {
                     System.out.println("Логин не найден.");
                     printWelcome();
                 }
-                break;
             case 2:
                 System.out.println("Введите логин:");
                 login = sc.nextLine();
@@ -273,7 +290,7 @@ public class DevicesShop implements ShopIF {
                 }
                 System.out.println("Введите ваш возраст:");
                 int age = sc.nextInt();
-                User newUser = new User(login, pass1, age);
+                UserIF newUser = new User(login, pass1, age);
                 addUser(newUser);
                 System.out.println("Авторизуйтесь заново.");
                 printWelcome();

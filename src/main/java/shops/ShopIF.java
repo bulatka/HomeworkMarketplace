@@ -1,26 +1,19 @@
 package shops;
 
 import goods.Goods;
-import goods.Order;
-import users.User;
+import users.UserIF;
 
 public interface ShopIF {
 
     void addToBasket(int item, int quantity);
 
-    void addUser(User user);
+    void addUser(UserIF user);
 
     void addItem(Goods item);
 
     void printAvailableGoods();
 
     void removeItem(Goods item);
-
-    void sortGoodsByName();
-
-    void searchByName(String name);
-
-    void recommendGoods();
 
     void printWelcome();
 
@@ -35,4 +28,6 @@ public interface ShopIF {
     void cancelOrder();
 
     void orderToMap(Order order);
+
+    void printBasket();
 }

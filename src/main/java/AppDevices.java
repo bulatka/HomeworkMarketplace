@@ -2,8 +2,9 @@ import goods.Goods;
 import shops.DevicesShop;
 import shops.ShopIF;
 import users.User;
+import users.VipUser;
 
-public class App {
+public class AppDevices {
     public static void main(String[] args) {
 
         ShopIF shop = new DevicesShop();
@@ -23,11 +24,10 @@ public class App {
         shop.removeItem(phone2);
 
         shop.addUser(new User("test", "pass", 33));
+        shop.addUser(new VipUser("vip", "vip", 21));
         System.out.println("\n\n");
 
         shop.printWelcome();
-        shop.printAvailableGoods();
-        shop.printMarket();
     }
 }
 

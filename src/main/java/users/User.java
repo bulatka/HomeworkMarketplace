@@ -1,6 +1,6 @@
 package users;
 
-public class User implements Payable {
+public class User implements UserIF {
     protected String login;
     protected String password;
 
@@ -8,15 +8,14 @@ public class User implements Payable {
         this.login = login;
         this.password = password;
     }
-
+    @Override
     public String getLogin() {
         return login;
     }
-
+    @Override
     public String getPassword() {
         return password;
     }
-
     @Override
     public void pay() {
         System.out.println("Сумма оплачена с баланса пользователя "
