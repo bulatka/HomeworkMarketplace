@@ -11,7 +11,7 @@ public class DevicesShop implements ShopIF {
     final private List<Goods> store = new ArrayList<>();
     final private int RECOMMENDATION_RATING = 7;
     private HashMap<String, User> usersList = new HashMap<>();
-    private HashMap<User, List<Order>> ordersMap = new HashMap<>();
+    private HashMap<User, HashMap<Integer, Order>> ordersMap = new HashMap<>();
     private HashMap<Goods, Integer> basket = new HashMap<>();
     private User authUser = new User(null, null, 0);
 
@@ -52,7 +52,12 @@ public class DevicesShop implements ShopIF {
     @Override
     public void addToBasket(int itemInt, int quantity) {
         Goods item = store.get(itemInt - 1);
-        basket.put(item, quantity);
+        if (basket.containsKey(item)) {
+            int qty = basket.get(item) + quantity;
+            basket.put(item, qty);
+        } else {
+            basket.put(item, quantity);
+        }
         System.out.println("Товар " + item + " -- " + quantity + "шт добавлен в корзину");
     }
 
@@ -109,7 +114,7 @@ public class DevicesShop implements ShopIF {
                 + "2. Поиск товара по имени.\n"
                 + "3. Рекомендовано к покупке.\n"
                 + "4. Перейти в корзину.\n"
-                + "5. Повторить или отменить заказ.\n");
+                + "5. Ваши заказы. Повторить или отменить заказ.\n");
 
         Scanner sc = new Scanner(System.in);
         int ch = Integer.parseInt(sc.nextLine());
@@ -135,29 +140,85 @@ public class DevicesShop implements ShopIF {
                 break;
             case 5:
                 System.out.println("Ваши заказы:");
-                List<Order> orList = this.ordersMap.get(authUser.getLogin());
-                System.out.println(orList);
+                System.out.println(ordersMap.get(authUser));
+                System.out.println("1. Повторить заказ.\n" +
+                        "2. Отменить заказ.\n" +
+                        "0. Назад меню.");
+                ch = sc.nextInt();
+                if (ch == 1) {
+                    reOrder();
+                    printMarket();
+                } else if (ch == 2) {
+                    cancelOrder();
+                    printMarket();
+                } else if (ch == 0) {
+                    break;
+                } else {
+                    System.out.println("Введен неверный пункт меню. Попробуйте снова.");
+                    printMenu();
+                }
         }
     }
 
     @Override
     public void order() {
-        Order order = new Order(basket);
-        System.out.println(order);
-        basket.clear();
+        System.out.println(basket);
+        System.out.println("Необходимо оплатить заказ!\n"
+                + "Для оплаты введите указанное ниже число либо 0 для отмены");
+        Random random = new Random();
+        int key = random.nextInt(1000, 9999);
+        System.out.println(key);
+        Scanner sc = new Scanner(System.in);
+        int keyInput = sc.nextInt();
+        if (keyInput == key) {
+            authUser.pay();
+            Order order = new Order(new HashMap<Goods, Integer>(basket));
+            orderToMap(order);
+        } else {
+            System.out.println("Вы ввели неверный код! Попробуте снова");
+            order();
+        }
+    }
+
+    @Override
+    public void orderToMap(Order order) {
         if (ordersMap.containsKey(authUser)) {
-            List<Order> userOrders = ordersMap.get(authUser);
-            userOrders.add(order);
+            HashMap<Integer, Order> userOrders = ordersMap.get(authUser);
+            userOrders.put(order.getID(), order);
             ordersMap.put(authUser, userOrders);
             System.out.println("Создан заказ №" + order.getID());
-            System.out.println(order.getBasket());
+            System.out.println(order);
+            basket.clear();
         } else {
-            List<Order> newUserOrders = new ArrayList<>();
-            newUserOrders.add(order);
+            HashMap<Integer, Order> newUserOrders = new HashMap();
+            newUserOrders.put(order.getID(), order);
             ordersMap.put(authUser, newUserOrders);
             System.out.println("Создан заказ №" + order.getID());
-            System.out.println(order.getBasket());
+            System.out.println(order);
+            basket.clear();
         }
+    }
+
+    @Override
+    public void reOrder() {
+        System.out.println("Введите номер заказа для повтора");
+        Scanner sc = new Scanner(System.in);
+        int inputID = sc.nextInt();
+        HashMap<Integer, Order> orderList = ordersMap.get(authUser);
+        Order reOrder = new Order(orderList.get(inputID).getBasket());
+        orderToMap(reOrder);
+    }
+
+    @Override
+    public void cancelOrder() {
+        System.out.println("Введите номер заказа для отмены");
+        Scanner sc = new Scanner(System.in);
+        int inputID = sc.nextInt();
+        HashMap<Integer, Order> orderList = ordersMap.get(authUser);
+        orderList.remove(inputID);
+        ordersMap.put(authUser, orderList);
+        System.out.println("Ваши заказы:");
+        System.out.println(ordersMap.get(authUser).toString());
     }
 
     @Override
@@ -183,6 +244,7 @@ public class DevicesShop implements ShopIF {
                     User exp = usersList.get(login);
                     if (exp.getPassword().equals(pass)) {
                         System.out.println("Вы вошли успешно вошли под логином " + exp.getLogin());
+                        authUser = exp;
                     } else {
                         System.out.println("Неправильный логин или пароль");
                         printWelcome();

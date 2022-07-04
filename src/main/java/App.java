@@ -3,14 +3,13 @@ import shops.DevicesShop;
 import shops.ShopIF;
 import users.User;
 
-import java.util.Scanner;
-
 public class App {
     public static void main(String[] args) {
 
         ShopIF shop = new DevicesShop();
         Goods phone = new Goods("Iphone 13", 1299, 9);
         Goods phone1 = new Goods("Iphone 12", 999, 8);
+        Goods phone2 = new Goods("Sony X1", 199, 2);
         Goods watch = new Goods("MiBand 6", 59, 8);
         Goods speaker = new Goods("JBL GO", 49, 7);
         Goods macbook = new Goods("Macbook Pro", 1999, 6);
@@ -21,6 +20,7 @@ public class App {
         shop.addItem(speaker);
         shop.addItem(macbook);
         shop.addItem(headphones);
+        shop.removeItem(phone2);
 
         shop.addUser(new User("test", "pass", 33));
         System.out.println("\n\n");
@@ -28,6 +28,6 @@ public class App {
         shop.printWelcome();
         shop.printAvailableGoods();
         shop.printMarket();
-        }
     }
+}
 

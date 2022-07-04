@@ -4,16 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c80594a7-0e0f-4608-ad7a-8f95b14815a8" name="Changes" comment="Homework done 89%">
+    <list default="true" id="c80594a7-0e0f-4608-ad7a-8f95b14815a8" name="Changes" comment="Homework done 91%">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/goods/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/goods/Order.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/shops/DevicesShop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/shops/DevicesShop.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/shops/ShopIF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/shops/ShopIF.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/users/Guest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/users/Guest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/users/GuestIF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/users/GuestIF.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/users/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/users/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/users/UserIF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/users/UserIF.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +93,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656846108833</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Homework done 91%">
+      <created>1656943733416</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1656943733416</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -114,7 +119,8 @@
     <MESSAGE value="Homework done 75%" />
     <MESSAGE value="Homework done 85%" />
     <MESSAGE value="Homework done 89%" />
-    <option name="LAST_COMMIT_MESSAGE" value="Homework done 89%" />
+    <MESSAGE value="Homework done 91%" />
+    <option name="LAST_COMMIT_MESSAGE" value="Homework done 91%" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

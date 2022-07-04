@@ -21,5 +21,8 @@ public class Order {
         return ID;
     }
 
-
+    @Override
+    public String toString() {
+        return "Заказ №" + ID + "\n[" + basket + "]";
+    }
 }

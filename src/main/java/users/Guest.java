@@ -12,12 +12,6 @@ public class Guest implements GuestIF, Payable {
         this.phoneNumber = phoneNumber;
     }
 
-//    @Override
-//    public void order(HashMap<Goods, Integer> basket) {
-//        Order newOrder = new Order(basket);
-//        System.out.println("Создан заказ №" + newOrder.getID() + ".");
-//    }
-
     @Override
     public void pay() {
         System.out.println("Сумма оплачена со счета мобильного телефона "
