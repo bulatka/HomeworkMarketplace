@@ -3,8 +3,6 @@ package shops;
 import goods.Goods;
 import users.User;
 
-import java.util.List;
-
 public interface ShopIF {
 
     void addToBasket(int item, int quantity);
@@ -24,5 +22,8 @@ public interface ShopIF {
 
     void printWelcome();
 
+    void printMarket();
+
     void printMenu();
+    void order();
 }
